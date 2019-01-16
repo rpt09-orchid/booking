@@ -1,0 +1,35 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "license": "",
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "scripts": {
+    "start-dev": "NODE_ENV=development nodemon server/server.js",
+    "start": "NODE_ENV=production node server/server.js ",
+    "seeder": "node server/seeder.js",
+    "test": "jest --detectOpenHandles"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.23.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.3.12",
+    "morgan": "^1.9.1",
+    "react-dates": "^18.2.2"
+  },
+  "devDependencies": {
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jest": "^23.6.0",
+    "mockingoose": "^2.11.0",
+    "superagent": "^4.0.0",
+    "supertest": "^3.3.0"
+  }
+}

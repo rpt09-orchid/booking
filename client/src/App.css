@@ -1,0 +1,67 @@
+.app-wrapper{
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 1em 2em 2em 2em;
+  border: 1px solid rgb(211, 211, 211);
+  width: 378px !important;
+  background: white;
+  float: right;
+  left: inherit !important;
+  right: 75px !important;
+  margin-top: 50px;
+  border-radius: 3px;
+  color: #484848;
+}
+
+.sticky-wrapper{
+  position: relative;
+  right: 75px;
+  float: right;
+  width: 378px !important;
+}
+
+.submitButton{
+  background: #FF5B60;
+  color: white;
+  border: none;
+  font-size: 18px;
+  border-radius: 3px;
+  padding: 12.5px 0px;
+  display: block;
+  cursor: pointer;
+  margin-top: 40px;
+  width: 100%;
+}
+
+
+.error-message{
+  padding: 10px;
+  font-size: 13px;
+  color: rgb(255, 79, 79);
+  top: 285px;
+  left: 60px;
+  position: absolute;
+}
+
+.success-modal{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.904);
+  z-index: 10000;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  height: 200px;
+  width: 378px;
+  border: 1px solid rgb(214, 214, 214);
+}
+
+.success-message{
+  font-size: 20px;
+  font-weight: bold;
+  color: #028489;
+  text-align: center;
+  line-height: 30px;
+}

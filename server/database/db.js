@@ -4,7 +4,7 @@ let mongo_uri;
 console.log(process.env.NODE_ENV === 'development')
 
 // Loading DB
-if (process.env.NODE_ENV.trim() === 'development') {
+if (process.env.NODE_ENV === 'development') {
   console.log('poop')
   const keys = require('../config/keys')
   mongo_uri = keys.mongodbUri

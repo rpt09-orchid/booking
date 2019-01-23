@@ -6,21 +6,23 @@ const moment = require('moment')
 const Listing = require('./models/Listing');
 
 const seeder = async () => {
-  // Listing.deleteMany({}, () => {
-  //   let batch = [];
-  //   // Generate 1oo properties
-  //   console.log(batch)
-  // });
-
-  const data = await generateBatch();
-
-  Listing.insertMany(data);
+  const batches = 1;
+  
+  for (let i = 0; i < batches; i++) {
+    const data = await generateBatch();
+    let bulk = Listing.initializeOrderedBulkOp();
+    console.log(bulk)
+    // bulk.insertMany(data);
+    // bulk.execute();
+  }
 };
 
 // Generate batch
 const generateBatch = async () => {
   let batch = [];
-  for (let j = 1; j <= 1000; j++) {
+  const recordsPerBatch = 5;
+
+  for (let j = 1; j <= recordsPerBatch; j++) {
     let details = [];
     for (let i = 1; i <= 50; i++) {
       let d = faker.date.between('2018-01-01', '2019-09-30');

@@ -8,7 +8,7 @@
     "node": ">=10.13.0"
   },
   "scripts": {
-    "start-dev": "SET NODE_ENV=development && nodemon server/server.js",
+    "start-dev": "cross-env NODE_ENV=development nodemon server/server.js",
     "start": "NODE_ENV=production node server/server.js ",
     "seeder": "node server/seeder.js",
     "test": "jest --detectOpenHandles"
@@ -26,6 +26,11 @@
     "react-dates": "^18.2.2"
   },
   "devDependencies": {
+<<<<<<< HEAD
+=======
+    "cross-env": "^5.2.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+>>>>>>> 6b01211339923dccf149caea62461eacdf6962ea
     "jest": "^23.6.0",
     "mockingoose": "^2.11.0",
     "superagent": "^4.0.0",

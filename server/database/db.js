@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-var test = process.env.NODE_ENV;
 let mongo_uri;
 
 // Loading DB
@@ -10,11 +9,11 @@ if (process.env.NODE_ENV === 'development') {
   mongo_uri = process.env.mongo_uri
 }
 
-mongoose.connect(mongo_uri, { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/booking', { useNewUrlParser: true });
 const db = mongoose.connection;
 
-db.on('error', () => {
-  console.log('mongoose connection error');
+db.on('error', (e) => {
+  console.log('mongoose connection error', e);
 });
 
 db.once('open', () => {

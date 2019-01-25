@@ -1,26 +1,35 @@
 const faker = require('faker');
-const db = require('./database/db');
-const moment = require('moment')
-
-// Load Listings Model
+const moment = require('moment');
+const mongoose = require('mongoose');
 const Listing = require('./models/Listing');
 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/booking');
+let db = mongoose.connection;
+
+db.on('error', (err) => {
+  console.log('error connecting', err);
+});
+
+db.once('open', () => {
+  console.log('Connected to DB');
+});
+
+
 const seeder = async () => {
-  const batches = 1;
-  
+const batches = 2;
   for (let i = 0; i < batches; i++) {
     const data = await generateBatch();
-    let bulk = Listing.initializeOrderedBulkOp();
-    console.log(bulk)
-    // bulk.insertMany(data);
-    // bulk.execute();
+    Listing.insertMany(data)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 };
 
 // Generate batch
 const generateBatch = async () => {
   let batch = [];
-  const recordsPerBatch = 5;
+  const recordsPerBatch = 100000;
 
   for (let j = 1; j <= recordsPerBatch; j++) {
     let details = [];
@@ -38,28 +47,19 @@ const generateBatch = async () => {
       details.push(detail)
     }
 
-    const newListing = new Listing({
+    const newListing = {
       listing_id: j,
       details: details,
       listing_price: faker.commerce.price(50, 100)
-    });
+    };
 
     batch.push(newListing)
   }
   return batch;
 };
 
-
-// save batch
-
- // newListing.save((err) => {
-    //   if (err) {
-    //     console.log(err)
-    //   }
-    // })
-
-// Call Seeder func
 seeder();
+
 
 
 

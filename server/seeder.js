@@ -1,36 +1,4 @@
 const faker = require('faker');
-<<<<<<< HEAD
-const db = require('./database/db');
-const moment = require('moment');
-
-// Load Listings Model
-const Listing = require('./models/Listing');
-
-const seeder = () => {
-  // Droping existing sample data
-  Listing.deleteMany({}, () => {
-    for (let j = 1; j <= 100; j++) {
-      let details = [];
-      for (let i = 1; i <= 50; i++) {
-        let d = faker.date.between('2018-01-01', '2019-09-30');
-        const newD = moment(d).startOf('day')
-        detail = {
-          date: newD,
-          guests: {
-            adults: faker.random.number({
-              'min': 1,
-              'max': 3
-            }),
-            children: faker.random.number({
-              'min': 0,
-              'max': 3
-            }),
-            infants: faker.random.number({
-              'min': 0,
-              'max': 3
-            }),
-          }
-=======
 const moment = require('moment');
 const mongoose = require('mongoose');
 const Listing = require('./models/Listing');
@@ -46,76 +14,65 @@ db.once('open', () => {
   console.log('Connected to DB');
 });
 
+let recordId = 0;
 
 const seeder = async () => {
-const batches = 2;
-  for (let i = 0; i < batches; i++) {
+  const batches = 50;
+  let batchCounter = 0;
+
+  while (batchCounter < batches) {
     const data = await generateBatch();
-    Listing.insertMany(data)
+    await Listing.insertMany(data)
       .catch((err) => {
         console.log(err);
       });
+    batchCounter++;
   }
 };
 
-// Generate batch
 const generateBatch = async () => {
   let batch = [];
-  const recordsPerBatch = 100000;
+  const recordsPerBatch = 1000;
+  let recordsCounter = 1;
 
-  for (let j = 1; j <= recordsPerBatch; j++) {
+  while (recordsCounter <= recordsPerBatch) {
     let details = [];
-    for (let i = 1; i <= 50; i++) {
+    let bookingsCounter = 1;
+
+    while (bookingsCounter <= 50) {
       let d = faker.date.between('2018-01-01', '2019-09-30');
-      const newD = moment(d).startOf('day')
+      const newD = moment(d).startOf('day');
       detail = {
         date: newD,
         guests: {
-          adults: faker.random.number({ 'min': 1, 'max': 3 }),
-          children: faker.random.number({ 'min': 0, 'max': 3 }),
-          infants: faker.random.number({ 'min': 0, 'max': 3 }),
->>>>>>> a32f86824732d142b714d41a9120410dc46f6c87
+          adults: faker.random.number({
+            'min': 1,
+            'max': 3
+          }),
+          children: faker.random.number({
+            'min': 0,
+            'max': 3
+          }),
+          infants: faker.random.number({
+            'min': 0,
+            'max': 3
+          })
         }
       }
-      details.push(detail)
+      details.push(detail);
+      bookingsCounter++;
     }
 
-<<<<<<< HEAD
-      const newListing = new Listing({
-        listing_id: j,
-        details: details,
-        listing_price: faker.commerce.price(50, 100)
-      })
-
-      newListing.save((err) => {
-        if (err) {
-          console.log(err)
-        }
-      })
-    }
-  })
-}
-
-// Call Seeder func
-seeder();
-=======
     const newListing = {
-      listing_id: j,
+      listing_id: recordId,
       details: details,
       listing_price: faker.commerce.price(50, 100)
     };
-
-    batch.push(newListing)
+    recordId++;
+    recordsCounter++;
+    batch.push(newListing);
   }
   return batch;
-};
+}
 
 seeder();
-
-
-
-
-
-
-
->>>>>>> a32f86824732d142b714d41a9120410dc46f6c87

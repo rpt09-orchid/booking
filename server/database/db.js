@@ -9,7 +9,10 @@ if (process.env.NODE_ENV === 'development') {
   mongo_uri = process.env.mongo_uri
 }
 
+<<<<<<< HEAD
 // FIX ME: Need to figure out why pulling in the uri from keys is not working
+=======
+>>>>>>> a32f86824732d142b714d41a9120410dc46f6c87
 mongoose.connect('mongodb://localhost/booking', { useNewUrlParser: true });
 const db = mongoose.connection;
 

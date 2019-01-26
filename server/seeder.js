@@ -3,7 +3,7 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const Listing = require('./models/Listing');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/booking');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/booking', { useNewUrlParser: true });
 let db = mongoose.connection;
 
 db.on('error', (err) => {
@@ -15,9 +15,10 @@ db.once('open', () => {
 });
 
 let recordId = 0;
+const batches = 1;
+const recordsPerBatch = 500;
 
 const seeder = async () => {
-  const batches = 2000;
   let batchCounter = 0;
 
   while (batchCounter < batches) {
@@ -26,13 +27,12 @@ const seeder = async () => {
       .catch((err) => {
         console.log(err);
       });
-    batchCounter++;
+    await batchCounter++;
   }
 };
 
 const generateBatch = async () => {
   let batch = [];
-  const recordsPerBatch = 5000;
   let recordsCounter = 1;
 
   while (recordsCounter <= recordsPerBatch) {
@@ -75,4 +75,12 @@ const generateBatch = async () => {
   return batch;
 }
 
-seeder();
+const timer = async (testFunction) => {
+  let startTime = Date.now(); 
+  await testFunction();
+  let timeElapsed = (Date.now() - startTime) / 1000;
+  console.log(`Inserting ${batches} batches of ${recordsPerBatch} records per batch...`);
+  console.log('Runtime:', timeElapsed, 'seconds');
+}
+
+timer(seeder);

@@ -15,64 +15,68 @@ db.once('open', () => {
 });
 
 let recordId = 0;
-const batches = 1;
-const recordsPerBatch = 500;
+let insertData = [];
+const batches = 100;
+const recordsPerBatch = 100000;
 
 const seeder = async () => {
   let batchCounter = 0;
 
   while (batchCounter < batches) {
-    const data = await generateBatch();
-    await Listing.insertMany(data)
+    generateBatch();
+    await Listing.insertMany(insertData)
       .catch((err) => {
         console.log(err);
       });
-    await batchCounter++;
+      insertData = [];
+    batchCounter++;
   }
+  console.log(insertData);
 };
 
-const generateBatch = async () => {
-  let batch = [];
-  let recordsCounter = 1;
+const generateBatch = () => {
 
-  while (recordsCounter <= recordsPerBatch) {
-    let details = [];
-    let bookingsCounter = 1;
-
-    while (bookingsCounter <= 50) {
-      let d = faker.date.between('2018-01-01', '2019-09-30');
-      const newD = moment(d).startOf('day');
-      detail = {
-        date: newD,
-        guests: {
-          adults: faker.random.number({
-            'min': 1,
-            'max': 3
-          }),
-          children: faker.random.number({
-            'min': 0,
-            'max': 3
-          }),
-          infants: faker.random.number({
-            'min': 0,
-            'max': 3
-          })
+    let recordsCounter = 1;
+    let batch = [];
+  
+    while (recordsCounter <= recordsPerBatch) {
+      let details = [];
+      let bookingsCounter = 1;
+  
+      while (bookingsCounter <= 1) {
+        let d = faker.date.between('2018-01-01', '2019-09-30');
+        const newD = moment(d).startOf('day');
+        detail = {
+          date: newD,
+          guests: {
+            adults: faker.random.number({
+              'min': 1,
+              'max': 3
+            }),
+            children: faker.random.number({
+              'min': 0,
+              'max': 3
+            }),
+            infants: faker.random.number({
+              'min': 0,
+              'max': 3
+            })
+          }
         }
+        details.push(detail);
+        bookingsCounter++;
       }
-      details.push(detail);
-      bookingsCounter++;
+  
+      const newListing = {
+        listing_id: 1,
+        details: details,
+        listing_price: faker.commerce.price(50, 100)
+      };
+  
+      recordId++;
+      recordsCounter++;
+      insertData.push(newListing);
     }
-
-    const newListing = {
-      listing_id: recordId,
-      details: details,
-      listing_price: faker.commerce.price(50, 100)
-    };
-    recordId++;
-    recordsCounter++;
-    batch.push(newListing);
-  }
-  return batch;
 }
 
 const timer = async (testFunction) => {

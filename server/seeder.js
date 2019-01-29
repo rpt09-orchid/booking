@@ -16,8 +16,8 @@ db.once('open', () => {
 
 let recordId = 0;
 let insertData = [];
-const batches = 100;
-const recordsPerBatch = 100000;
+const batches = 1000;
+const recordsPerBatch = 10000;
 
 const seeder = async () => {
   let batchCounter = 0;

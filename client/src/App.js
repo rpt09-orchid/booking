@@ -30,16 +30,19 @@ if(process.env.NODE_ENV === 'development'){
 
 
 class App extends React.Component {
-
-  state={
-    startDate: '',
-    endDate: '',
-    guests: [],
-    days: [],
-    price: null,
-
-    successMessage: null,
-    errorMessage: '',
+  
+  constructor() {
+    super();
+    this.state={
+      startDate: '',
+      endDate: '',
+      guests: [],
+      days: [],
+      price: null,
+  
+      successMessage: null,
+      errorMessage: '',
+    }
   }
 
 

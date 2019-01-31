@@ -20,7 +20,7 @@ let recordId = 0;
 let insertData = [];
 const useModel = false;
 const batches = 100;
-const recordsPerBatch = 1;
+const recordsPerBatch = 100000;
 let progressInserted = 0;
 let uniqId = 1;
 
@@ -57,7 +57,7 @@ const insert = (useModel) => {
     });
   } else {
     return new Promise(function (resolve, reject) {
-      db.collection('listing').insertMany(insertData, function (error, doc) {
+      db.collection('listings').insertMany(insertData, function (error, doc) {
         if (error) {
           console.log(error);
         } else {
@@ -78,9 +78,9 @@ const generateBatch = () => {
 
     while (bookingsCounter <= 1) {
       let d = faker.date.between('2018-01-01', '2019-09-30');
-      const newD = moment(d).startOf('day');
+      // const newD = moment(d).startOf('day');
       detail = {
-        date: newD,
+        date: d,
         guests: {
           adults: faker.random.number({
             'min': 1,

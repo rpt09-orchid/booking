@@ -15,6 +15,8 @@ import { faStarHalf, faStar, faArrowRight, faIgloo, faPlusCircle, faMinusCircle}
 
 import './App.css'
 
+console.log(process.env.NODE_ENV)
+
 library.add(faStarHalf, faStar, faIgloo, faPlusCircle, faMinusCircle, faArrowRight)
 
 let id = '/1';

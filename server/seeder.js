@@ -20,8 +20,9 @@ let recordId = 0;
 let insertData = [];
 const useModel = false;
 const batches = 100;
-const recordsPerBatch = 100000;
+const recordsPerBatch = 1;
 let progressInserted = 0;
+let uniqId = 1;
 
 const seeder = async () => {
   let batchCounter = 0;
@@ -68,7 +69,6 @@ const insert = (useModel) => {
 }
 
 const generateBatch = () => {
-
   let recordsCounter = 1;
   let batch = [];
 
@@ -101,11 +101,12 @@ const generateBatch = () => {
     }
 
     const newListing = {
-      listing_id: 1,
+      listing_id: uniqId,
       details: details,
       listing_price: faker.commerce.price(50, 100)
     };
-
+    
+    uniqId++;
     recordId++;
     recordsCounter++;
     insertData.push(newListing);

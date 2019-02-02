@@ -15,13 +15,19 @@ class Reviews extends Component {
   }
 
   componentDidMount(){
-    axios.get(`http://firebnb-reviews.8di9c2yryn.us-east-1.elasticbeanstalk.com/ratings${this.props.id}`)
-      .then((result) => {
-        this.setState({
-          reviewsCount: result.data.numReviews,
-          reviewsAverage: result.data.avgRating
-        })
-      })
+    // USING FAKE DATA FOR THIS UNTIL CHRIS'S SERVICE IS UP
+    this.setState({
+      reviewsCount: 4,
+      reviewsAverage: 4
+    })
+    
+    // axios.get(`http://firebnb-reviews.8di9c2yryn.us-east-1.elasticbeanstalk.com/ratings${this.props.id}`)
+    //   .then((result) => {
+    //     this.setState({
+    //       reviewsCount: result.data.numReviews,
+    //       reviewsAverage: result.data.avgRating
+    //     })
+    //   })
   }
 
   render() {

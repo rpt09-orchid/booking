@@ -76,7 +76,7 @@ const generateBatch = () => {
     let details = [];
     let bookingsCounter = 1;
 
-    while (bookingsCounter <= 1) {
+    while (bookingsCounter <= 10) {
       let d = faker.date.between('2018-01-01', '2019-09-30');
       // const newD = moment(d).startOf('day');
       detail = {

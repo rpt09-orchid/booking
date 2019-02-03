@@ -8,11 +8,6 @@ import moment from 'moment';
 import Overview from './components/Overview'
 import { StickyContainer, Sticky } from 'react-sticky';
 import { faStarHalf, faStar, faArrowRight, faIgloo, faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
-
-
-
-
-
 import './App.css'
 
 console.log(process.env.NODE_ENV)
@@ -53,7 +48,6 @@ class App extends React.Component {
     this.handleGetBookedDates()
   }
   
-
   handleStartDate = (startDate) =>{
     this.setState({startDate})
   }
@@ -65,7 +59,6 @@ class App extends React.Component {
   handleGuests = (guests) => {
     this.setState({guests})
   }
-
 
   handleGetBookedDates = () => {
 

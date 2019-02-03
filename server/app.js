@@ -66,7 +66,7 @@ app.get('/booking/:id', (req, res) => {
 // @desc      Books date(s) to the database
 // @access    Public
 app.post('/booking/:id', (req, res) => {
-
+  console.log(req.body)
     let guests = req.body.guests
 
     let startDate = moment(req.body.startDate);

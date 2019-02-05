@@ -19,8 +19,8 @@ db.once('open', () => {
 let recordId = 0;
 let insertData = [];
 const useModel = false;
-const batches = 1;
-const recordsPerBatch = 1000;
+const batches = 100;
+const recordsPerBatch = 100000;
 let progressInserted = 0;
 let uniqId = 1;
 

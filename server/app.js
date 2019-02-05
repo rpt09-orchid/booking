@@ -40,7 +40,6 @@ app.get('/booking/:id', (req, res) => {
 
   Listing.findOne({listing_id: req.params.id})
     .then(listing => {
-
       if(listing === null){
         res.status(404).json({listingnotfound: 'No listing found'})
       }
@@ -55,7 +54,6 @@ app.get('/booking/:id', (req, res) => {
       listing.details.forEach((detail) => {
         currentListing.days.push(detail.date)
       })
-
       res.json(currentListing)
     })
  });
@@ -136,38 +134,3 @@ app.post('/booking/:id', (req, res) => {
 
 module.exports = app
 
-
- 
-
-
-
-
-    // while(day <= endDate){
-    //   // create an object for each day
-    //   const bookedDay = {};
-    //   // transform moment object to js date object and add to bookedDay object
-    //   bookedDay.date = day.toDate();
-    //   // add guest to each day that is beeing booked
-    //   bookedDay.guests = guests;
-    //   // push booked day into day array
-    //   days.push(bookedDay)
-    //   // add 1 to start date to reach end date and set 
-    //    day = day.clone().add(1, 'd');
-    // }
-
-    // BookedDates.findOne({listing_id: req.params.id})
-    //   .then(listing => {  
-
-    //     console.log(listing)
-        
-        // days.forEach(day => {
-
-        //   if(day === listing.bookedDates)
-        //   console.log(day)
-        //   listing.bookedDates.push(day)
-        // })
-
-        // listing.save().then(() =>{
-        //   res.status(201).json("Your dates have been booked")
-        // })
-    // })

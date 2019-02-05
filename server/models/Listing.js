@@ -20,7 +20,8 @@ const ListingSchema = new Schema({
 
     listing_id: {
       type: Number,
-      required: true
+      required: true,
+      index: true
     },
     details: [DetailsSchema],
     listing_price: {

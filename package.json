@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "booking",
   "version": "",
   "description": "",
   "author": "",
@@ -8,7 +8,7 @@
     "node": ">=10.13.0"
   },
   "scripts": {
-    "start-dev": "SET NODE_ENV=development && nodemon server/server.js",
+    "server-dev": "cross-env NODE_ENV=development nodemon server/server.js",
     "start": "NODE_ENV=production node server/server.js ",
     "seeder": "node server/seeder.js",
     "test": "jest --detectOpenHandles"
@@ -16,6 +16,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "lodash": "^4.17.11",
@@ -26,10 +27,18 @@
     "react-dates": "^18.2.2"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "cross-env": "^5.2.0",
     "jest": "^23.6.0",
     "mockingoose": "^2.11.0",
     "superagent": "^4.0.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^2.0.2",
+    "style-loader": "^0.23.1"
   }
 }

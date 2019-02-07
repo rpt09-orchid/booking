@@ -7,26 +7,3 @@ ul {
   padding: 0;
   list-style-type: none;
 }
-
-.cancel-booking-row-elements {
-  padding: 0;
-  margin-bottom: 10px;
-}
-
-.cancel-booking-row-elements li {
-  display:inline;
-}
-
-.cancel-btn {
-  display:inline;
-  vertical-align: middle;
-}
-
-.cancel-btn img{
-  width: 15px;
-}
-
-.date-text {
-  display:inline;
-  padding-left: 5px
-}

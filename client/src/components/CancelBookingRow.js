@@ -1,5 +1,5 @@
 import React from 'react';
-import './CancelBooking.css';
+import './CancelBookingRow.css';
 import closeBtn from '../assets/x-btn.png';
 
 const CancelBookingRow = () => {

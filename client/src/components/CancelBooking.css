@@ -1,0 +1,26 @@
+#cancel-booking-wrapper {
+  height: 95%;
+  background-color: #00ff00;
+  overflow: auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.cancel-booking-row {
+  padding: 0;
+}
+
+.cancel-cooking-row li {
+  display:inline;
+}
+
+.cancel-btn {
+  display:inline;
+
+}
+
+.date-text {
+  display:inline;
+}

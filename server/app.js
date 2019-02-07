@@ -64,9 +64,10 @@ app.get('/booking/:id', (req, res) => {
 // @desc      Books date(s) to the database
 // @access    Public
 app.post('/booking/:id', (req, res) => {
-  console.log(req.body)
+  if(req.body.action === 'delete') {
+    console.log('deleted!')
+  } else {
     let guests = req.body.guests
-
     let startDate = moment(req.body.startDate);
     let endDate = moment(req.body.endDate);
     
@@ -77,14 +78,11 @@ app.post('/booking/:id', (req, res) => {
 
     Listing.findOne({listing_id: req.params.id})
       .then((listing) => {
-
-         // Check if for any conflicting dates and return 400 if a rogue date is identified
          if(checkForConflictingDates(listing, startDate, endDate)){
            res.status(400).send({invalid: 'Unfortunately this date range is unavailable'})
            return;
          } else {
 
-          // Book dates if no rogue date has been identified
           bookDates(listing, startDate, endDate, guests)
             .then(() => {
               listing.save().then(() =>{
@@ -93,7 +91,9 @@ app.post('/booking/:id', (req, res) => {
             })
          }
       });
+  }
   });
+
 
 
 

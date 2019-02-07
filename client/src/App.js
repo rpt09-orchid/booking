@@ -39,6 +39,7 @@ class App extends React.Component {
   
       successMessage: null,
       errorMessage: '',
+      showRemoveBooking: false
     }
   }
 
@@ -125,9 +126,7 @@ class App extends React.Component {
 
       successModal = (
         <div className="success-modal">
-          
           <div className="success-message">{this.state.successMessage}</div>
-    
         </div>)
     } 
 
@@ -153,6 +152,7 @@ class App extends React.Component {
           />
           <p className="error-message">{this.state.errorMessage}</p>
           <input className="submitButton" type="submit" onClick={this.handleSubmitBooking} value="Request to Book"/>
+          <a href="" className="removeBookingLink">Cancel a booking</a>
         </div>
         )}
         </Sticky>

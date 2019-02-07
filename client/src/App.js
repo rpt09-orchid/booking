@@ -1,6 +1,7 @@
 import React from 'react';
 import DateSelector from './components/DateSelector';
 import Guests from './components/Guests';
+import CancelBooking from './components/CancelBooking';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import axios from 'axios';
 import faker from 'faker';
@@ -39,7 +40,7 @@ class App extends React.Component {
   
       successMessage: null,
       errorMessage: '',
-      showRemoveBooking: false
+      showRemoveBooking: true
     }
   }
 
@@ -117,49 +118,68 @@ class App extends React.Component {
         })
      }
 
+     showCancelBooking = () => {
+       this.setState({
+        showRemoveBooking: true
+       })
+     }
+
 
   render(){
 
     let successModal = null;
     
     if(this.state.successMessage){
-
       successModal = (
         <div className="success-modal">
           <div className="success-message">{this.state.successMessage}</div>
         </div>)
     } 
 
-    
-    return(
-      <div>
-      <StickyContainer className="sticky-wrapper">
-          <Sticky>
-         { ({ style }) => (
-        <div className="app-wrapper" style={style}>
-
-          {successModal}
-          <Overview price={this.state.price} id={id}/>
-          <DateSelector
-            handleStartDate={this.handleStartDate}
-            handleEndDate={this.handleEndDate}
-            bookedDates={this.state.days}
-          />
-
-           <Guests
-           guests={this.guests}
-           handleGuests={this.handleGuests}
-          />
-          <p className="error-message">{this.state.errorMessage}</p>
-          <input className="submitButton" type="submit" onClick={this.handleSubmitBooking} value="Request to Book"/>
-          <a href="" className="removeBookingLink">Cancel a booking</a>
+      if (!this.state.showRemoveBooking) {
+        return(
+        <div>
+        <StickyContainer className="sticky-wrapper">
+            <Sticky>
+           { ({ style }) => (
+          <div className="app-wrapper" style={style}>
+  
+            {successModal}
+            <Overview price={this.state.price} id={id}/>
+            <DateSelector
+              handleStartDate={this.handleStartDate}
+              handleEndDate={this.handleEndDate}
+              bookedDates={this.state.days}
+            />
+  
+             <Guests guests={this.guests} handleGuests={this.handleGuests} />
+            <p className="error-message">{this.state.errorMessage}</p>
+            <input className="submitButton" type="submit" onClick={this.handleSubmitBooking} value="Request to Book"/>
+            <span className="removeBookingLink" onClick={this.showCancelBooking}>Cancel a booking</span>
+          </div>
+          )}
+          </Sticky>
+          <div style={{minHeight: 2000 }}></div>
+        </StickyContainer>
         </div>
-        )}
-        </Sticky>
-        <div style={{minHeight: 2000 }}></div>
-      </StickyContainer>
-      </div>
-    )
+        )
+      } else {
+        return(
+          <div>
+          <StickyContainer className="sticky-wrapper">
+              <Sticky>
+             { ({ style }) => (
+            <div className="app-wrapper" style={style}>
+              <CancelBooking />
+            </div>
+            )}
+            </Sticky>
+            <div style={{minHeight: 2000 }}></div>
+          </StickyContainer>
+          </div>
+          )
+      }
+
   }
 }
 

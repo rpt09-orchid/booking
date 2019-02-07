@@ -4,6 +4,7 @@
   padding: 1em 2em 2em 2em;
   border: 1px solid rgb(211, 211, 211);
   width: 378px !important;
+  height: 432px !important;
   background: white;
   float: right;
   left: inherit !important;
@@ -70,4 +71,10 @@
   display: block;
   margin-top: 1em;
   text-align: center;
+}
+
+#cancel-booking-wrapper {
+  height: 95%;
+  background-color: #00ff00;
+  overflow: auto;
 }

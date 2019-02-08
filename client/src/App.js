@@ -170,7 +170,7 @@ class App extends React.Component {
               <Sticky>
              { ({ style }) => (
             <div className="app-wrapper" style={style}>
-              <CancelBooking />
+              <CancelBooking propertyId={id} url={URL}/>
             </div>
             )}
             </Sticky>

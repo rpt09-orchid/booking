@@ -2,13 +2,14 @@ import React from 'react';
 import './CancelBooking.css';
 import CancelBookingRow from './CancelBookingRow'
 import closeBtn from '../assets/x-btn.png';
+import uniqid from 'uniqid';
 import axios from 'axios';
 
   class CancelBooking extends React.Component {
     constructor() {
       super();
 
-      this.state={
+      this.state = {
         dates: []
       }
     }
@@ -21,7 +22,7 @@ import axios from 'axios';
     getAllDates() {
       axios.get(`${this.props.url}/${this.props.propertyId.slice(1)}`)
       .then((property) => {
-        console.log(property.data)
+        this.setState({dates: property.data.days});
       })
       .catch((err) => {
         console.log(err);
@@ -30,29 +31,14 @@ import axios from 'axios';
 
     render() {
       return (
-
-        // Do a map of all of the dates in state and return a new row for each
-
-        //To delete, each row should have a click handler to remove the date from 
-        // the database, as well as from state to update the front end
-        
         <div id="cancel-booking-wrapper">
           <ul>
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
-            <CancelBookingRow />
+            {
+               this.state.dates.map(function(item, i){
+                console.log('test');
+                return <CancelBookingRow key={uniqid()}/>
+              })
+            }
           </ul>
         </div>
       )

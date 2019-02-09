@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 
 // Details Schema
 const DetailsSchema = new Schema({
-
+    booking_id: {
+      type: Number,
+      required: true,
+      index: true
+    },
     date: {
       type: Date,
       required: true

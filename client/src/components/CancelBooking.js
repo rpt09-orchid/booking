@@ -29,14 +29,27 @@ import axios from 'axios';
       });
     }
 
+    handleCancelDate() {
+      // api call to endpoint to cancel a date
+      axios.delete(`${this.props.url}/${this.props.propertyId.slice(1)}`)
+      .then((property) => {
+        this.setState({dates: property.data.days});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+
     render() {
+
+      let bookingIdReference = 1;
       return (
         <div id="cancel-booking-wrapper">
           <ul>
             {
-               this.state.dates.map(function(item, i){
-                console.log('test');
-                return <CancelBookingRow key={uniqid()}/>
+               this.state.dates.map((date) => {
+                 bookingIdReference++;
+                return <CancelBookingRow key={uniqid()} date={date} bookingId={bookingIdReference - 1} handleCancelDate={this.handleCancelDate.bind(this)}/>
               })
             }
           </ul>

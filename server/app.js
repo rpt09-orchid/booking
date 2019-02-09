@@ -64,9 +64,6 @@ app.get('/booking/:id', (req, res) => {
 // @desc      Books date(s) to the database
 // @access    Public
 app.post('/booking/:id', (req, res) => {
-  if(req.body.action === 'delete') {
-    console.log('deleted!')
-  } else {
     let guests = req.body.guests
     let startDate = moment(req.body.startDate);
     let endDate = moment(req.body.endDate);
@@ -91,7 +88,16 @@ app.post('/booking/:id', (req, res) => {
             })
          }
       });
-  }
+  });
+
+  app.delete('/booking/:id', (req, res) => {
+    Listing.findOneAndUpdate(
+      { listing_id: req.params.id}, 
+      { $pull: { "details": { 'booking_id': 1 } } }, 
+      function(err, data){
+        console.log(err)
+        //console.log(err, data);
+      });
   });
 
 

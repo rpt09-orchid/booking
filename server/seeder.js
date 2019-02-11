@@ -20,7 +20,11 @@ let recordId = 0;
 let insertData = [];
 const useModel = false;
 const batches = 10;
+<<<<<<< HEAD
 const recordsPerBatch = 10;
+=======
+const recordsPerBatch = 100;
+>>>>>>> bb456576b7eaf414c9db89837dee61a5b92aaff2
 let progressInserted = 0;
 let uniqId = 1;
 
@@ -79,6 +83,7 @@ const generateBatch = () => {
     while (bookingsCounter <= 10) {
       let d = faker.date.between('2018-01-01', '2019-09-30');
       detail = {
+        booking_id: bookingsCounter,
         date: d,
         guests: {
           adults: faker.random.number({

@@ -35,8 +35,8 @@ import axios from 'axios';
           <ul>
             {
                this.state.dates.map(function(item, i){
-                console.log('test');
-                return <CancelBookingRow key={uniqid()}/>
+                console.log(item.toString().slice(0, 11));
+                return <CancelBookingRow key={uniqid()} handleCancelDate={this.props.handleCancelDate} />
               })
             }
           </ul>

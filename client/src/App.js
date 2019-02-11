@@ -124,6 +124,10 @@ class App extends React.Component {
        })
      }
 
+     handleCancelDate() {
+       console.log('Cancelling date!')
+     }
+
 
   render(){
 
@@ -170,7 +174,7 @@ class App extends React.Component {
               <Sticky>
              { ({ style }) => (
             <div className="app-wrapper" style={style}>
-              <CancelBooking propertyId={id} url={URL}/>
+              <CancelBooking propertyId={id} url={URL} days={this.state.days} handleCancelDate={this.handleCancelDate.bind(this)}>
             </div>
             )}
             </Sticky>

@@ -6,7 +6,7 @@ const CancelBookingRow = () => {
   return (
     <li className="cancel-booking-row">
       <ul className="cancel-booking-row-elements">
-        <li className="cancel-btn"><img src={closeBtn} /></li>
+        <li className="cancel-btn"><img src={closeBtn} onClick={this.props.handleCancelDate}/></li>
         <li className="date-text">11-13-2019</li>
       </ul>
     </li>

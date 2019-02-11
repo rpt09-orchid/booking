@@ -3,7 +3,7 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const Listing = require('./models/Listing');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/booking', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://ec2-52-12-173-71.us-west-2.compute.amazonaws.com:27017/booking', {
   useNewUrlParser: true
 });
 let db = mongoose.connection;
@@ -19,8 +19,8 @@ db.once('open', () => {
 let recordId = 0;
 let insertData = [];
 const useModel = false;
-const batches = 100;
-const recordsPerBatch = 100000;
+const batches = 10;
+const recordsPerBatch = 10;
 let progressInserted = 0;
 let uniqId = 1;
 
@@ -120,3 +120,9 @@ const timer = async (testFunction) => {
 }
 
 timer(seeder);
+
+
+// mongo --port 27017 ec2-52-12-173-71.us-west-2.compute.amazonaws.com
+// mongo -u booking -p 4Efa5f6272 ec2-52-12-173-71.us-west-2.compute.amazonaws.com:27017/booking
+
+

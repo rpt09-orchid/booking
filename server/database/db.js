@@ -3,13 +3,12 @@ let mongo_uri;
 
 // Loading DB
 if (process.env.NODE_ENV === 'development') {
-  const keys = require('../config/keys');
-  mongo_uri = keys.mongodbUri
+  mongo_uri = 'mongodb://localhost/booking'
 } else {
-  mongo_uri = process.env.mongo_uri
+  mongo_uri = process.env.MONGODB_URI;
 }
 
-mongoose.connect('mongodb://localhost/booking', { useNewUrlParser: true });
+mongoose.connect(mongo_uri, { useNewUrlParser: true });
 const db = mongoose.connection;
 
 db.on('error', (e) => {

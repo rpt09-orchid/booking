@@ -133,12 +133,12 @@ class App extends React.Component {
 
     let successModal = null;
     
-    if(this.state.successMessage){
-      successModal = (
-        <div className="success-modal">
-          <div className="success-message">{this.state.successMessage}</div>
-        </div>)
-    } 
+    // if(this.state.successMessage){
+    //   successModal = (
+    //     <div className="success-modal">
+    //       <div className="success-message">{this.state.successMessage}</div>
+    //     </div>)
+    // } 
 
       if (!this.state.showRemoveBooking) {
         return(
@@ -174,7 +174,7 @@ class App extends React.Component {
               <Sticky>
              { ({ style }) => (
             <div className="app-wrapper" style={style}>
-              <CancelBooking propertyId={id} url={URL} days={this.state.days} handleCancelDate={this.handleCancelDate.bind(this)}>
+              <CancelBooking propertyId={id} url={URL} days={this.state.days} handleCancelDate={this.handleCancelDate.bind(this)} />
             </div>
             )}
             </Sticky>

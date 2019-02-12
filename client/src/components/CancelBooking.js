@@ -47,15 +47,9 @@ import axios from 'axios';
         <div id="cancel-booking-wrapper">
           <ul>
             {
-<<<<<<< HEAD
-               this.state.dates.map(function(item, i){
-                console.log(item.toString().slice(0, 11));
-                return <CancelBookingRow key={uniqid()} handleCancelDate={this.props.handleCancelDate} />
-=======
                this.state.dates.map((date) => {
                  bookingIdReference++;
                 return <CancelBookingRow key={uniqid()} date={date} bookingId={bookingIdReference - 1} handleCancelDate={this.handleCancelDate.bind(this)}/>
->>>>>>> bb456576b7eaf414c9db89837dee61a5b92aaff2
               })
             }
           </ul>

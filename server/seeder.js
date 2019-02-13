@@ -3,7 +3,7 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const Listing = require('./models/Listing');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://ec2-52-12-173-71.us-west-2.compute.amazonaws.com:27017/booking', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/booking', {
   useNewUrlParser: true
 });
 let db = mongoose.connection;

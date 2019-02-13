@@ -20,11 +20,13 @@ if (window.location.pathname !== '/') {
   id = window.location.pathname;
 }
 
-let URL = 'http://booking.jtaqrb8zaa.us-west-2.elasticbeanstalk.com/booking';
+let URL;
 
 if(process.env.NODE_ENV === 'development'){
    URL = 'http://localhost:3004/booking'
-} 
+} else {
+  URL = process.env.PROD_URI;
+}
 
 
 class App extends React.Component {
@@ -40,7 +42,7 @@ class App extends React.Component {
   
       successMessage: null,
       errorMessage: '',
-      showRemoveBooking: true
+      showRemoveBooking: false
     }
   }
 
@@ -124,21 +126,16 @@ class App extends React.Component {
        })
      }
 
-     handleCancelDate() {
-       console.log('Cancelling date!')
-     }
-
-
   render(){
 
     let successModal = null;
     
-    // if(this.state.successMessage){
-    //   successModal = (
-    //     <div className="success-modal">
-    //       <div className="success-message">{this.state.successMessage}</div>
-    //     </div>)
-    // } 
+    if(this.state.successMessage){
+      successModal = (
+        <div className="success-modal">
+          <div className="success-message">{this.state.successMessage}</div>
+        </div>)
+    } 
 
       if (!this.state.showRemoveBooking) {
         return(
@@ -174,7 +171,7 @@ class App extends React.Component {
               <Sticky>
              { ({ style }) => (
             <div className="app-wrapper" style={style}>
-              <CancelBooking propertyId={id} url={URL} days={this.state.days} handleCancelDate={this.handleCancelDate.bind(this)} />
+              <CancelBooking propertyId={id} url={URL} days={this.state.days} />
             </div>
             )}
             </Sticky>

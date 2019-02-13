@@ -5,8 +5,6 @@ import axios from 'axios';
 
 import './Overview.css'
 
-
-
 class Reviews extends Component {
 
   state={

@@ -11,8 +11,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import { faStarHalf, faStar, faArrowRight, faIgloo, faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import './App.css'
 
-console.log(process.env.NODE_ENV)
-
+debugger;
 library.add(faStarHalf, faStar, faIgloo, faPlusCircle, faMinusCircle, faArrowRight)
 
 let id = '/1';
@@ -65,16 +64,12 @@ class App extends React.Component {
   }
 
   handleGetBookedDates = () => {
-
     axios.get(URL + `${id}`)
     .then(result => {
-      
       const days = [];
-
       result.data.days.forEach((day) => {
         days.push(new Date(day))
       })
-      
       this.setState({
         days: days,
         price: result.data.price

@@ -37,20 +37,14 @@ const Listing = require('./models/Listing');
 // @desc      Gets all booked dates for a listing
 // @access    Public
 app.get('/booking/:id', (req, res) => {
-
   Listing.findOne({listing_id: req.params.id})
     .then(listing => {
       if(listing === null){
         res.status(404).json({listingnotfound: 'No listing found'})
       }
-
       let currentListing = {};
-
-      // Send back price of listing
       currentListing.price = listing.listing_price
-      // only sending back days booked
       currentListing.days = [];
-
       listing.details.forEach((detail) => {
         currentListing.days.push(detail.date)
       })
@@ -90,17 +84,30 @@ app.post('/booking/:id', (req, res) => {
       });
   });
 
+  // Delete a single day from UI
   app.delete('/booking/:id', (req, res) => {
+    const bookingId = req.body.bookingId;
     Listing.findOneAndUpdate(
       { listing_id: req.params.id}, 
-      { $pull: { "details": { 'booking_id': 1 } } }, 
+      { $pull: { "details": { 'booking_id': bookingId } } }, 
+      {new: true},
       function(err, data){
-        console.log(err)
-        //console.log(err, data);
+        if (err) { console.log(err) }
+        res.json(data);
       });
   });
 
-
+    // Delete a single day from API
+    app.delete('/:listingId/:bookingId', (req, res) => {
+      Listing.findOneAndUpdate(
+        { listing_id: req.params.listingId}, 
+        { $pull: { "details": { 'booking_id': req.params.bookingId } } }, 
+        {new: true},
+        function(err, data){
+          if (err) { console.log(err) }
+          res.json(data);
+        });
+    });
 
 
   const checkForConflictingDates = (listing, startDate, endDate) => {

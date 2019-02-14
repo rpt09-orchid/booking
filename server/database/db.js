@@ -5,6 +5,7 @@ let mongo_uri;
 if (process.env.NODE_ENV === 'development') {
   mongo_uri = 'mongodb://localhost/booking'
 } else {
+  console.log('MONGO URL:', process.env.MONGODB_URI)
   mongo_uri = process.env.MONGODB_URI;
 }
 

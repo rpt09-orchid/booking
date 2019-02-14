@@ -24,6 +24,7 @@ let URL;
 if(process.env.NODE_ENV === 'development'){
    URL = 'http://localhost:3004/booking'
 } else {
+  console.log('PROD URI', process.env.PROD_URI)
   URL = process.env.PROD_URI;
 }
 

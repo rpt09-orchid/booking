@@ -24,6 +24,7 @@
     "mongodb": "^3.1.10",
     "mongoose": "^5.3.12",
     "morgan": "^1.9.1",
+    "newrelic": "^5.3.0",
     "react-dates": "^18.2.2"
   },
   "devDependencies": {

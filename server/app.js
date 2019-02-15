@@ -6,7 +6,7 @@ const cors = require('cors');
 const moment = require('moment');
 const morgan = require('morgan');
 const _ = require('lodash')
-
+require('newrelic');
 
 const app = express();
 app.use(morgan('tiny'))
@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 // Serving Static Files
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use('/:id', express.static(path.join(__dirname, '../client/public')));
+app.use('/loaderio-927e368995a5ba705678096770accb6c.txt', express.static(path.join(__dirname, '../client/public/loaderio-927e368995a5ba705678096770accb6c.txt')));
 
 
 // Load Listings Model

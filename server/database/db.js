@@ -3,8 +3,7 @@ let mongo_uri;
 
 // Loading DB
 if (process.env.NODE_ENV === 'development') {
-  console.log('REGITERED AS DEV:', process.env.MONGODB_URI)
-  mongo_uri = 'mongodb://localhost:3004/booking'
+  mongo_uri = 'mongodb://localhost:27017/booking'
 } else {
   console.log('MONGO URL:', process.env.MONGODB_URI)
   mongo_uri = process.env.MONGODB_URI;

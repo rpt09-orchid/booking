@@ -4,6 +4,7 @@
   padding: 1em 2em 2em 2em;
   border: 1px solid rgb(211, 211, 211);
   width: 378px !important;
+  height: 432px !important;
   background: white;
   float: right;
   left: inherit !important;
@@ -64,4 +65,10 @@
   color: #028489;
   text-align: center;
   line-height: 30px;
+}
+
+.removeBookingLink {
+  display: block;
+  margin-top: 1em;
+  text-align: center;
 }

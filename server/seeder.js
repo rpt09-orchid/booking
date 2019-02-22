@@ -3,7 +3,7 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const Listing = require('./models/Listing');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/booking', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/booking', {
   useNewUrlParser: true
 });
 let db = mongoose.connection;
@@ -79,6 +79,7 @@ const generateBatch = () => {
     while (bookingsCounter <= 10) {
       let d = faker.date.between('2018-01-01', '2019-09-30');
       detail = {
+        booking_id: bookingsCounter,
         date: d,
         guests: {
           adults: faker.random.number({
@@ -120,3 +121,9 @@ const timer = async (testFunction) => {
 }
 
 timer(seeder);
+
+
+// mongo --port 27017 ec2-52-12-173-71.us-west-2.compute.amazonaws.com
+// mongo -u booking -p 4Efa5f6272 ec2-52-12-173-71.us-west-2.compute.amazonaws.com:27017/booking
+
+

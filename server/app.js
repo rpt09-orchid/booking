@@ -6,7 +6,7 @@ const cors = require('cors');
 const moment = require('moment');
 const morgan = require('morgan');
 const _ = require('lodash')
-
+require('newrelic');
 
 const app = express();
 app.use(morgan('tiny'))
@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 // Serving Static Files
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use('/:id', express.static(path.join(__dirname, '../client/public')));
+app.use('/loaderio-927e368995a5ba705678096770accb6c.txt', express.static(path.join(__dirname, '../client/public/loaderio-927e368995a5ba705678096770accb6c.txt')));
 
 
 // Load Listings Model
@@ -37,20 +38,14 @@ const Listing = require('./models/Listing');
 // @desc      Gets all booked dates for a listing
 // @access    Public
 app.get('/booking/:id', (req, res) => {
-
   Listing.findOne({listing_id: req.params.id})
     .then(listing => {
       if(listing === null){
         res.status(404).json({listingnotfound: 'No listing found'})
       }
-
       let currentListing = {};
-
-      // Send back price of listing
       currentListing.price = listing.listing_price
-      // only sending back days booked
       currentListing.days = [];
-
       listing.details.forEach((detail) => {
         currentListing.days.push(detail.date)
       })
@@ -64,9 +59,7 @@ app.get('/booking/:id', (req, res) => {
 // @desc      Books date(s) to the database
 // @access    Public
 app.post('/booking/:id', (req, res) => {
-  console.log(req.body)
     let guests = req.body.guests
-
     let startDate = moment(req.body.startDate);
     let endDate = moment(req.body.endDate);
     
@@ -77,14 +70,11 @@ app.post('/booking/:id', (req, res) => {
 
     Listing.findOne({listing_id: req.params.id})
       .then((listing) => {
-
-         // Check if for any conflicting dates and return 400 if a rogue date is identified
          if(checkForConflictingDates(listing, startDate, endDate)){
            res.status(400).send({invalid: 'Unfortunately this date range is unavailable'})
            return;
          } else {
 
-          // Book dates if no rogue date has been identified
           bookDates(listing, startDate, endDate, guests)
             .then(() => {
               listing.save().then(() =>{
@@ -95,6 +85,30 @@ app.post('/booking/:id', (req, res) => {
       });
   });
 
+  // Delete a single day from UI
+  app.delete('/booking/:id', (req, res) => {
+    const bookingId = req.body.bookingId;
+    Listing.findOneAndUpdate(
+      { listing_id: req.params.id}, 
+      { $pull: { "details": { 'booking_id': bookingId } } }, 
+      {new: true},
+      function(err, data){
+        if (err) { console.log(err) }
+        res.json(data);
+      });
+  });
+
+    // Delete a single day from API
+    app.delete('/:listingId/:bookingId', (req, res) => {
+      Listing.findOneAndUpdate(
+        { listing_id: req.params.listingId}, 
+        { $pull: { "details": { 'booking_id': req.params.bookingId } } }, 
+        {new: true},
+        function(err, data){
+          if (err) { console.log(err) }
+          res.json(data);
+        });
+    });
 
 
   const checkForConflictingDates = (listing, startDate, endDate) => {
